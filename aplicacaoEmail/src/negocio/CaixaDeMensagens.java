@@ -9,7 +9,27 @@ public class CaixaDeMensagens {
 	private List<Usuario> usuarios = new LinkedList<Usuario>();
 	private UsuarioDAO usuarioDAO;
 	private EmailDAO emailDAO;
+	private Usuario logado = new Usuario();
+	private Usuario destinatario = new Usuario();
+	private static CaixaDeMensagens instance = null;
 	
+	public static CaixaDeMensagens getInstance() {
+		if(instance == null) {
+			try {
+				instance = new CaixaDeMensagens();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SelectException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return instance;
+	}
 	public CaixaDeMensagens() throws ClassNotFoundException, SQLException, SelectException {
 			usuarioDAO = UsuarioDAO.getInstance();
 			emailDAO = EmailDAO.getInstance();
@@ -17,6 +37,12 @@ public class CaixaDeMensagens {
 	}
 	public List<Usuario> retornaUsuarios() throws SelectException{
 		return usuarioDAO.selectAll();
+	}
+	public Usuario getUsuarioLogado() {
+		return logado;
+	}
+	public Usuario getUsuarioDestinatario() {
+		return destinatario;
 	}
 	public void adicionaUsuario(Usuario usuario) throws UsuarioJaCadastradoException, InsertException, SelectException {
 		if(!comparaUsuario(usuario)) {
@@ -35,6 +61,7 @@ public class CaixaDeMensagens {
 				if(u.getSenha().equals(usuario.getSenha())) {
 					System.out.println("Login realizado com sucesso!\n");
 					login = usuarioDAO.select(usuario.getNome());
+					this.logado = login;
 					break;
 				}
 			}
@@ -75,6 +102,7 @@ public class CaixaDeMensagens {
 		if(compararId(usuario,id)) {
 			Email selecionado = emailSelecionado(usuario, id);
 			resposta.setDestinatario(selecionado.getRemetente());
+			this.destinatario = resposta.getDestinatario();
 			resposta.setRemetente(usuario);
 		}else {
 			resposta = null;

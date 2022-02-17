@@ -65,7 +65,7 @@ public class Email {
 		return unidade;
 	}
 		
-	private String decodifica() {
+	public String decodifica() {
 		char []corpoEmail = corpo.toCharArray();
 		int cifra = getUnidadeData() + getUnidadeId();
 		String corpoNovo = "";
