@@ -29,6 +29,7 @@ public class TelaEnviarEmail extends JFrame {
 	JLabel infoDestinatario = new JLabel("Destinatário: ");
 	JLabel infoEnviar = new JLabel("Mensagem: ");
 	private JButton botaoEnviar = new JButton("Enviar");
+	private JButton botaoFechar = new JButton("Fechar");
 	private JTextField caixaDestinatario = new JTextField();
 	private JTextArea caixaMensagem = new JTextArea();
 	
@@ -52,8 +53,10 @@ public class TelaEnviarEmail extends JFrame {
 		painelEntrada.add(infoEnviar);
 		caixaMensagem.setBounds(20,80,260,150);
 		painelEntrada.add(caixaMensagem);
-		botaoEnviar.setBounds(52,240,200,20);
+		botaoEnviar.setBounds(42,240,108,20);
 		painelEntrada.add(botaoEnviar);
+		botaoFechar.setBounds(155,240,108,20);
+		painelEntrada.add(botaoFechar);
 		
 		botaoEnviar.addActionListener(new ActionListener() {
 
@@ -89,6 +92,14 @@ public class TelaEnviarEmail extends JFrame {
 					JOptionPane.showMessageDialog(null,e1.getMessage(),"InsertException",JOptionPane.ERROR_MESSAGE);
 				}
 				
+			}
+			
+		});
+		botaoFechar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();				
 			}
 			
 		});

@@ -59,7 +59,6 @@ public class CaixaDeMensagens {
 		for(Usuario u : usuarios) {
 			if(u.getNome().equals(usuario.getNome())) {
 				if(u.getSenha().equals(usuario.getSenha())) {
-					System.out.println("Login realizado com sucesso!\n");
 					login = usuarioDAO.select(usuario.getNome());
 					this.logado = login;
 					break;
@@ -86,7 +85,18 @@ public class CaixaDeMensagens {
 			emailDAO.insert(mensagem);
 		}
 		
-	}	
+	}
+	public Email selecionarEmail(Usuario usuario, int id) throws SelectException, EmailInexistenteException {
+		Email novo = new Email();
+		if(compararId(usuario, id)) {
+			novo = emailSelecionado(usuario,id);
+		}else {
+			novo = null;
+			throw new EmailInexistenteException("Esse e-mail não existe");
+		}
+		return novo;
+		
+	}
 	public void excluirEmail(Usuario usuario, int id) throws EmailInexistenteException, DeleteException, SelectException {
 		Email excluir = new Email();
 		if(compararId(usuario,id)) {
@@ -135,11 +145,8 @@ public class CaixaDeMensagens {
 		}
 		return false;
 	}
-	public List<Email> imprimirEmailLogin(Usuario login) throws SelectException, CaixaDeMensagensVaziaException {
+	public List<Email> imprimirEmailLogin(Usuario login) throws SelectException {
 		List<Email> lista = emailDAO.select(login);
-		if(lista.size() == 0) {
-			throw new CaixaDeMensagensVaziaException("Caixa de Mensagens vazia!");
-		}
 		return lista;
 	}
 	private Email emailSelecionado(Usuario usuario, int id) throws SelectException {

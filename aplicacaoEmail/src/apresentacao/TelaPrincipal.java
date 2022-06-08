@@ -18,7 +18,7 @@ public class TelaPrincipal extends JFrame {
 	private CaixaDeMensagens sistema = CaixaDeMensagens.getInstance();
 	private Usuario logado = sistema.getUsuarioLogado();
 	JLabel infoUsuario = new JLabel("Bem vindo(a) "+logado.getNome());
-	private JButton botaoExibirEmail = new JButton("Exibir Emails");
+	private JButton botaoExibirEmail = new JButton("Lista Emails");
 	private JButton botaoEnviarEmail = new JButton("Enviar Emails");
 	private JButton botaoLogout = new JButton("Logout");
 	

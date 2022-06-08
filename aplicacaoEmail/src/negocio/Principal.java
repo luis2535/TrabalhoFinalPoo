@@ -149,8 +149,6 @@ public class Principal {
 			for(Email e : emails) {
 				System.out.println(e+"\n");
 			}
-		} catch (CaixaDeMensagensVaziaException e) {
-			System.err.println(e.getMessage());
 		} catch (SelectException e) {
 			System.err.println(e.getMessage());
 			
@@ -216,8 +214,6 @@ public class Principal {
 			System.out.println("E-mail enviado com sucesso!");
 			System.out.println("");
 			
-		} catch (CaixaDeMensagensVaziaException e) {
-			System.err.println(e.getMessage());
 		} catch (EmailInexistenteException e) {
 			System.err.println(e.getMessage());
 		} catch (DestinatarioInvalidoException e) {
@@ -244,8 +240,7 @@ public class Principal {
 			System.out.println("");
 			System.out.println("Email removido com sucesso!");
 			System.out.println("");
-		} catch (CaixaDeMensagensVaziaException e) {
-			System.err.println(e.getMessage());
+
 		} catch (EmailInexistenteException e) {
 			System.err.println(e.getMessage());
 		} catch (SelectException e) {
@@ -278,8 +273,7 @@ public class Principal {
 				Email e = emails.get(i);
 				System.out.println("ID: "+e.getId()+" Remetente: "+e.getRemetente()+" Data: "+e.getData()+" Hora: "+e.getHora());
 			}
-		} catch (CaixaDeMensagensVaziaException e) {
-			System.err.println(e.getMessage());
+	
 		} catch (SelectException e) {
 			System.err.println(e.getMessage());
 		}
